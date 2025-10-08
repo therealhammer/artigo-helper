@@ -1,3 +1,4 @@
+import os
 from pynput.keyboard import Controller, Key
 import dearpygui.dearpygui as dpg
 from time import sleep
