@@ -53,22 +53,32 @@ def send(arr):
         sleep(0.1)
 
 dpg.create_context()
-dpg.create_viewport(title='Artigo-Helper', width=300, height=100)
+dpg.create_viewport(title='Artigo-Helper', width=480, height=100)
 dpg.setup_dearpygui()
+btnw=110
+
+with dpg.font_registry():
+    default_font = dpg.add_font("SpaceMono-Regular.ttf", 22)
 with dpg.window(label="Artigo Helper", tag="primary"):
-    dpg.add_text("Artigo helper made with love and GPT")
     with dpg.group(horizontal=True):
-        dpg.add_button(label="Numbers", tag="numbers", callback=btn_callback)
-        dpg.add_button(label="Séculos", tag="seculos", callback=btn_callback)
-        dpg.add_button(label="Months", tag="months", callback=btn_callback)
+        dpg.add_text("Artigo helper made with love and GPT")
+        dpg.add_text(""" ,-"-,-"-.
+(         )
+ ".     ."
+   "._." """, color=[255,0,0])
     with dpg.group(horizontal=True):
-        dpg.add_button(label="Verbos", tag="verbs", callback=btn_callback)
-        dpg.add_button(label="Primeira", tag="primeira", callback=btn_callback)
-        dpg.add_button(label="Alphabet", tag="alph", callback=btn_callback)
+        dpg.add_button(width=btnw, label="Numbers", tag="numbers", callback=btn_callback)
+        dpg.add_button(width=btnw, label="Séculos", tag="seculos", callback=btn_callback)
+        dpg.add_button(width=btnw, label="Months", tag="months", callback=btn_callback)
     with dpg.group(horizontal=True):
-        dpg.add_button(label="Timeunits", tag="time", callback=btn_callback)
-        dpg.add_button(label="Fim", tag="fim", callback=btn_callback)
-        dpg.add_button(label="Exit", tag="exit", callback=btn_callback)
+        dpg.add_button(width=btnw, label="Verbos", tag="verbs", callback=btn_callback)
+        dpg.add_button(width=btnw, label="Primeira", tag="primeira", callback=btn_callback)
+        dpg.add_button(width=btnw, label="Alphabet", tag="alph", callback=btn_callback)
+    with dpg.group(horizontal=True):
+        dpg.add_button(width=btnw, label="Timeunits", tag="time", callback=btn_callback)
+        dpg.add_button(width=btnw, label="Fim", tag="fim", callback=btn_callback)
+        dpg.add_button(width=btnw, label="Exit", tag="exit", callback=btn_callback)
+    dpg.bind_font(default_font)
 
 dpg.show_viewport()
 dpg.set_primary_window("primary", True)
