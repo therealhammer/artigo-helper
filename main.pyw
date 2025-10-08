@@ -1,6 +1,7 @@
 from pynput.keyboard import Controller, Key
 import dearpygui.dearpygui as dpg
-from time import sleep 
+from time import sleep
+import sys
 
 keyboard = Controller()
 
@@ -36,6 +37,13 @@ def btn_callback(sender, app_data, user_data):
     elif (sender == "exit"):
         exit()
 
+def resource_path(relative_path):
+    try:
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
 
 def typewrite(txt):
     for i in txt:
@@ -58,7 +66,7 @@ dpg.setup_dearpygui()
 btnw=110
 
 with dpg.font_registry():
-    default_font = dpg.add_font("SpaceMono-Regular.ttf", 22)
+    default_font = dpg.add_font(resource_path("SpaceMono-Regular.ttf"), 22)
 with dpg.window(label="Artigo Helper", tag="primary"):
     with dpg.group(horizontal=True):
         dpg.add_text("Artigo helper made with love and GPT")

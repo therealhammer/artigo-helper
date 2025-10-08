@@ -4,7 +4,7 @@
 a = Analysis(
     ['main.pyw'],
     pathex=[],
-    binaries=[],
+    binaries=[('SpaceMono-Regular.ttf', '.')],
     datas=[],
     hiddenimports=[],
     hookspath=[],
