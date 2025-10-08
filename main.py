@@ -1,5 +1,5 @@
-#from pyautogui import press, typewrite, hotkey
 from pynput.keyboard import Controller, Key
+import dearpygui.dearpygui as dpg
 from time import sleep 
 
 keyboard = Controller()
@@ -15,6 +15,26 @@ time_units = ["hora", "dia", "minuto", "segundo", "semana", "mês", "ano", "déc
 alphabet = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
 fim = ["começar", "começo", "início", "iniciar", "fim", "final", "finalizar", "meio", "metade"]
 
+def btn_callback(sender, app_data, user_data):
+    print(f"sender is: {sender}")
+    if (sender == "numbers"):
+        send(numbers + numbers_pt)
+    elif (sender == "seculos"):
+        send(roman_numerals)
+    elif (sender == "months"):
+        send(months)
+    elif (sender == "verbs"):
+        send(roman_numerals)
+    elif (sender == "primeira"):
+        send(ordinals)
+    elif (sender == "alph"):
+        send(alphabet)
+    elif (sender == "time"):
+        send(time_units)
+    elif (sender == "fim"):
+        send(fim)
+    elif (sender == "exit"):
+        exit()
 
 
 def typewrite(txt):
@@ -32,8 +52,34 @@ def send(arr):
         keyboard.tap(Key.enter)
         sleep(0.1)
 
+dpg.create_context()
+dpg.create_viewport(title='Artigo-Helper', width=300, height=100)
+dpg.setup_dearpygui()
+with dpg.window(label="Artigo Helper", tag="primary"):
+    dpg.add_text("Artigo helper made with love and GPT")
+    with dpg.group(horizontal=True):
+        dpg.add_button(label="Numbers", tag="numbers", callback=btn_callback)
+        dpg.add_button(label="Séculos", tag="seculos", callback=btn_callback)
+        dpg.add_button(label="Months", tag="months", callback=btn_callback)
+    with dpg.group(horizontal=True):
+        dpg.add_button(label="Verbos", tag="verbs", callback=btn_callback)
+        dpg.add_button(label="Primeira", tag="primeira", callback=btn_callback)
+        dpg.add_button(label="Alphabet", tag="alph", callback=btn_callback)
+    with dpg.group(horizontal=True):
+        dpg.add_button(label="Timeunits", tag="time", callback=btn_callback)
+        dpg.add_button(label="Fim", tag="fim", callback=btn_callback)
+        dpg.add_button(label="Exit", tag="exit", callback=btn_callback)
 
-print(r'''
+dpg.show_viewport()
+dpg.set_primary_window("primary", True)
+dpg.start_dearpygui()
+dpg.destroy_context()
+
+
+
+
+def legacy_unwindowed():
+    print(r'''
       ______________________________________________
       |                                            |
       |  Artigo helper made with love and ChatGPT  |
@@ -51,8 +97,8 @@ print(r'''
            `
 
       ''')
-while (True):
-    a = input(r'''
+    while (True):
+        a = input(r'''
       ____________________________________________________________
       | Press: |    1    |    2    |    3    |    4    |    5    |
       |        |         |         |         |         |         |
@@ -64,27 +110,27 @@ while (True):
       |________|_________|_________|_________|_________|_________|
 
         Select: ''')
-    if (a == "1"):
-        send(numbers + numbers_pt)
-    elif (a == "2"):
-        send(roman_numerals)
-    elif (a == "3"):
-        send(months)
-    elif (a == "4"):
-        send(common_verbs)
-    elif (a == "5"):
-        send(ordinals)
-    elif (a == "6"):
-        send(alphabet)
-    elif (a == "7"):
-        send(time_units)
-    elif (a == "8"):
-        send(fim)
-    elif (a == "9"):
-        send(["I love You"])
-    elif (a == "0"):
-        exit()
-    else:
-        print("Ungültiger input, try novamente. ")
+        if (a == "1"):
+            send(numbers + numbers_pt)
+        elif (a == "2"):
+            send(roman_numerals)
+        elif (a == "3"):
+            send(months)
+        elif (a == "4"):
+            send(common_verbs)
+        elif (a == "5"):
+            send(ordinals)
+        elif (a == "6"):
+            send(alphabet)
+        elif (a == "7"):
+            send(time_units)
+        elif (a == "8"):
+            send(fim)
+        elif (a == "9"):
+            send(["I love You"])
+        elif (a == "0"):
+            exit()
+        else:
+            print("Ungültiger input, try novamente. ")
 
 
