@@ -53,13 +53,16 @@ def typewrite(txt):
 
 def send(arr):
     print("     Starting in: ")
+    dpg.set_value(1, "Starting in: ")
     for i in range(3):
+        dpg.set_value(1, f"Starting in: {3-i}")
         print(3-i)
         sleep(1)
     for i in arr:
         typewrite(i)
         keyboard.tap(Key.enter)
         sleep(0.1)
+    dpg.set_value(1, "Ready...")
 
 dpg.create_context()
 dpg.create_viewport(title='Artigo-Helper', width=480, height=100)
@@ -70,7 +73,9 @@ with dpg.font_registry():
     default_font = dpg.add_font(resource_path("SpaceMono-Regular.ttf"), 22)
 with dpg.window(label="Artigo Helper", tag="primary"):
     with dpg.group(horizontal=True):
-        dpg.add_text("Artigo helper made with love and GPT")
+        with dpg.group():
+            dpg.add_text("Artigo helper made with love and GPT")
+            dpg.add_text("Ready...", id=1, tag="out")
         dpg.add_text(""" ,-"-,-"-.
 (         )
  ".     ."
