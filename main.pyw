@@ -36,6 +36,7 @@ def btn_callback(sender, app_data, user_data):
     elif (sender == "fim"):
         send(fim)
     elif (sender == "exit"):
+        dpg.destroy_context()
         exit()
 
 def resource_path(relative_path):
