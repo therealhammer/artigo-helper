@@ -26,7 +26,7 @@ def btn_callback(sender, app_data, user_data):
     elif (sender == "months"):
         send(months)
     elif (sender == "verbs"):
-        send(roman_numerals)
+        send(common_verbs)
     elif (sender == "primeira"):
         send(ordinals)
     elif (sender == "alph"):
